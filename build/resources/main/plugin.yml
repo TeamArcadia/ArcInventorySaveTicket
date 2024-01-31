@@ -1,0 +1,9 @@
+name: ArcInventorySaveTicket
+version: '1.0.0'
+author: Adeu._.
+main: com.sh.arcinventorysaveticket.ArcInventorySaveTicket
+api-version: '1.17'
+
+commands:
+  인벤세이브권:
+    aliases: [ arcinventorysaveticket, inventorysaveticket, ist ]
