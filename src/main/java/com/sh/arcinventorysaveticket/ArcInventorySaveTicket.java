@@ -19,11 +19,8 @@ public class ArcInventorySaveTicket extends JavaPlugin {
 
         MessageContext.getInstance().initialize(getConfig());
 
-//        configManager = new ConfigManager();
-//        configManager.initialize();
-
         /* --------------- COMMAND --------------- */
-        getCommand("인벤세이브권").setExecutor(new InventorySaveTicketCommand(this));
+        new InventorySaveTicketCommand(this);
 
         /* --------------- LISTENER --------------- */
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);

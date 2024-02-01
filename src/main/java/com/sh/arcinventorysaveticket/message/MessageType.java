@@ -7,9 +7,9 @@ import lombok.Getter;
 @Getter
 public enum MessageType {
 
-    NORMAL("normal"),
-    ERROR("error"),
-    MAIN("main");
+    NORMAL("message.normal"),
+    ERROR("message.error"),
+    MAIN("message.main");
 
     private final String type;
 }

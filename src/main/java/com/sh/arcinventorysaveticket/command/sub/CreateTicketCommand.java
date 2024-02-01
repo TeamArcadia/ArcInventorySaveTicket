@@ -1,13 +1,15 @@
 package com.sh.arcinventorysaveticket.command.sub;
 
+import com.sh.arcinventorysaveticket.ArcInventorySaveTicket;
 import com.sh.arcinventorysaveticket.command.SubCommand;
 import com.sh.arcinventorysaveticket.message.MessageContext;
 import com.sh.arcinventorysaveticket.message.MessageType;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.StringUtil;
 
 import java.util.*;
 
@@ -37,8 +39,12 @@ public class CreateTicketCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
 
+        FileConfiguration config = ArcInventorySaveTicket.getInstance().getConfig();
+        ConfigurationSection ticketItemSec = config.getConfigurationSection("item-manage");
+
         MessageContext messageContext = MessageContext.getInstance();
         Player player = (Player) sender;
+
 
         if (args.length == 1) {
             ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
@@ -48,7 +54,9 @@ public class CreateTicketCommand implements SubCommand {
                 messageContext.get(MessageType.MAIN, "air_item_in_hand").send(sender);
                 return;
             }
-            savedItems.put(player.getUniqueId(), itemStack.clone());
+
+            ticketItemSec.set("ticket-item", itemStack);
+            ArcInventorySaveTicket.getInstance().saveConfig();
 
             messageContext.get(MessageType.MAIN, "create_ticket").send(sender);
         } else {
