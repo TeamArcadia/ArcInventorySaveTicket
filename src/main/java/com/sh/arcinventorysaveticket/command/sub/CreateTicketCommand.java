@@ -15,7 +15,6 @@ import java.util.*;
 
 public class CreateTicketCommand implements SubCommand {
 
-    public static HashMap<UUID, ItemStack> savedItems = new HashMap<>();
     @Override
     public String getKoName() {
         return "생성";

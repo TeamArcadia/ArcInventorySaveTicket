@@ -13,9 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Collections;
 import java.util.List;
 
-import static com.sh.arcinventorysaveticket.command.sub.CreateTicketCommand.savedItems;
-import static java.util.Collections.emptyList;
-
 public class GetTicketCommand implements SubCommand {
     @Override
     public String getKoName() {
@@ -52,7 +49,6 @@ public class GetTicketCommand implements SubCommand {
             ItemStack savedItemSec = ticketItemSec.getItemStack("ticket-item");
             player.getInventory().addItem(savedItemSec.clone());
         }
-
         messageContext.get(MessageType.MAIN, "get_ticket").send(sender);
     }
 
