@@ -2,13 +2,19 @@ package com.sh.arcinventorysaveticket.command.sub;
 
 import com.sh.arcinventorysaveticket.ArcInventorySaveTicket;
 import com.sh.arcinventorysaveticket.command.SubCommand;
+import com.sh.arcinventorysaveticket.manage.ItemManager;
 import com.sh.arcinventorysaveticket.message.MessageContext;
 import com.sh.arcinventorysaveticket.message.MessageType;
+import com.sh.arcinventorysaveticket.nms.tank.NmsItemStackUtil;
+import com.sh.arcinventorysaveticket.nms.wrapper.NBTTagCompoundWrapper;
+import com.sh.arcinventorysaveticket.nms.wrapper.NmsItemWrapper;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,18 +43,11 @@ public class GetTicketCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
 
-        FileConfiguration config = ArcInventorySaveTicket.getInstance().getConfig();
-        ConfigurationSection ticketItemSec = config.getConfigurationSection("item-manage");
-
         MessageContext messageContext = MessageContext.getInstance();
         Player player = (Player) sender;
 
-        if (ticketItemSec == null) {
-            messageContext.get(MessageType.MAIN, "no_save_item").send(sender);
-        } else {
-            ItemStack savedItemSec = ticketItemSec.getItemStack("ticket-item");
-            player.getInventory().addItem(savedItemSec.clone());
-        }
+        ItemManager.giveTicket(player);
+
         messageContext.get(MessageType.MAIN, "get_ticket").send(sender);
     }
 

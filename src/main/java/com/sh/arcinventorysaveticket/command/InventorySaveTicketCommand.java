@@ -1,6 +1,5 @@
 package com.sh.arcinventorysaveticket.command;
 
-import com.sh.arcinventorysaveticket.command.sub.CreateTicketCommand;
 import com.sh.arcinventorysaveticket.command.sub.GetTicketCommand;
 import com.sh.arcinventorysaveticket.command.sub.ReloadConfigCommand;
 import org.bukkit.command.Command;
@@ -30,7 +29,6 @@ public class InventorySaveTicketCommand implements TabExecutor {
     private void registerSubCommands() {
         registerSubCommand(new GetTicketCommand());
         registerSubCommand(new ReloadConfigCommand());
-        registerSubCommand(new CreateTicketCommand());
     }
 
     private void registerSubCommand(SubCommand subCommand) {
