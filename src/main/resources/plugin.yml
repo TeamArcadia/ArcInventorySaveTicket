@@ -2,8 +2,19 @@ name: ArcInventorySaveTicket
 version: '${version}'
 author: Adeu._.
 main: com.sh.arcinventorysaveticket.ArcInventorySaveTicket
-api-version: '1.17'
+api-version: '1.13'
 
 commands:
   인벤세이브권:
-    aliases: [ arcinventorysaveticket, inventorysaveticket, ist ]
+
+permissions:
+  arc.inventorysaveticket.*:
+    default: op
+    children:
+      - arc.inventorysaveticket.reload
+      - arc.inventorysaveticket.get
+
+  arc.inventorysaveticket.reload:
+    default: op
+  arc.inventorysaveticket.get:
+    default: 0p

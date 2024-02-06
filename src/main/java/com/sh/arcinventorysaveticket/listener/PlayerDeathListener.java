@@ -2,6 +2,8 @@ package com.sh.arcinventorysaveticket.listener;
 
 import com.sh.arcinventorysaveticket.ArcInventorySaveTicket;
 import com.sh.arcinventorysaveticket.manage.ItemManager;
+import com.sh.arcinventorysaveticket.message.MessageContext;
+import com.sh.arcinventorysaveticket.message.MessageType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -14,18 +16,13 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
+        MessageContext messageContext = MessageContext.getInstance();
+
         Player player = event.getEntity();
         ItemStack itemStack = ItemManager.getTicketItemStack();
 
         if (itemStack == null) {
-            player.sendMessage("null");
-            return;
-        }
-
-        FileConfiguration config = ArcInventorySaveTicket.getInstance().getConfig();
-        ConfigurationSection ticketItemSec = config.getConfigurationSection("ticket-item");
-
-        if (ticketItemSec == null) {
+            messageContext.get(MessageType.MAIN, "no_save_item").send(player);
             return;
         }
 
@@ -43,6 +40,8 @@ public class PlayerDeathListener implements Listener {
             inventory[itemIndex] = null;
 
             event.getDrops().clear();
+
+            messageContext.get(MessageType.MAIN, "use_ticket").send(player);
 
             ArcInventorySaveTicket.getInstance().getServer().getScheduler().runTaskLater(ArcInventorySaveTicket.getInstance(), () -> {
                 player.getInventory().setContents(inventory);
