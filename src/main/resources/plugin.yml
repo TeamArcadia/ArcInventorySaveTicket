@@ -17,4 +17,4 @@ permissions:
   arc.inventorysaveticket.reload:
     default: op
   arc.inventorysaveticket.get:
-    default: 0p
+    default: op
